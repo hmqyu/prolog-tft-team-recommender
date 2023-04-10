@@ -46,7 +46,7 @@ all_traits = util.add_all_traits(synergies_csv)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 for team_url in team_comp_urls:
     driver.get(util.MAIN_URL + team_url)
-    time.sleep(2)   # give time for browser to load
+    time.sleep(1)   # give time for browser to load
     team_soup = BeautifulSoup(driver.page_source, features="html.parser")
     util.extract_team_info(team_soup, teams_csv, augments_csv, synergies_csv, all_traits)
 

@@ -45,14 +45,14 @@ def extract_team_info(s, teams_csv, augments_csv, synergies_csv, all_traits):
     units = []
     for unit in units_html.find_all('div', {"class": "m-1avyp1d"}):
         units.append(unit.find('div', {"class": "m-1lpv2x1"}).string.lower())
-    teams_csv["Units"].append(units)
+    teams_csv["Units"].append(", ".join(units))
 
     carousel_priorities_html = s.find_all('img', {"class": "m-hl6zqa"})
     carousel_priorities = []
     for item in carousel_priorities_html:
         item_name = item["title"].replace('-', ' ')
         carousel_priorities.append(item_name)
-    teams_csv["Carousel Priority"].append(carousel_priorities)
+    teams_csv["Carousel Priority"].append(", ".join(carousel_priorities))
 
     augment_tiers = ["Best Silver Augments", "Best Gold Augments", "Best Prismatic Augments", "Best Hero Augments"]
     all_augments_html = s.find_all('div', {"class": "m-1cggxe8"})
@@ -64,7 +64,7 @@ def extract_team_info(s, teams_csv, augments_csv, synergies_csv, all_traits):
         if (augments_list == []):
             for augment in augments_type.find_all('img', {"class": "m-1wgeyf7"}):
                 augments_list.append(re.sub('\d+', '', augment["title"].replace('-','')))   # some images end with a 1 for some reason?????
-        augments_csv[augment_tiers[i]].append(augments_list)
+        augments_csv[augment_tiers[i]].append(", ".join(augments_list))
     
     extract_trait_info(s, synergies_csv, all_traits)
 
