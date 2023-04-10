@@ -1,0 +1,32 @@
+,Team Name,Team Description,Roll Type,Difficulty,Rank,Units,Carousel Priority
+0,Killer Kai'Sa,This is a full Quickdraw comp that uses Kai'Sa as your main carry with Star Guardians as backup.,slow roll,easy,s,"[""kai'sa"", 'ekko', 'miss fortune', 'garen', 'alistar', 'nilah', 'ezreal', 'rell']","['tear of the goddess', 'bf sword', 'recurve bow', 'needlessly large rod', 'chain vest']"
+1,Animas 2.0,"This is a full Anima Squad comp that uses Riven, Vayne and Miss Fortune as your main carries!",default,easy,b,"['miss fortune', 'riven', 'vayne', 'ekko', 'garen', 'alistar', 'jinx', 'nasus']","['needlessly large rod', 'chain vest', 'giants belt', 'bf sword']"
+2,OX Slingers,"This is a full AP comp that focuses on Spellslinger with Neeko & Twisted Fate as your main carries and Ox Force as tanks.
+",default,medium,s,"['twisted fate', 'annie', 'neeko', 'janna', 'ekko', 'viego', 'alistar', 'fiora']","['needlessly large rod', 'bf sword', 'recurve bow', 'tear of the goddess', 'chain vest']"
+3,Rift-Gades,This comp is a Renegade - Riftwalkers comp with the 4-costs Jhin and Viego as damage and Ox Force as your tanks.,default,medium,a,"['jhin', 'viego', 'ekko', 'zac', 'alistar', 'vex', 'annie', 'fiora', 'pyke']","['bf sword', 'sparring gloves', 'recurve bow', 'negatron cloak', 'needlessly large rod']"
+4,Laser Wolf,This comp uses a full Laser Corp team with Warwick on the Hacker Hex as main carry!,default,medium,a,"['warwick', 'mordekaiser', 'shen', 'garen', 'leblanc', 'pyke', 'yasuo', 'renekton']","['bf sword', 'chain vest', 'negatron cloak', 'recurve bow', 'sparring gloves']"
+5,S.H.I.E.L.D.,"This is a full Defender comp that uses Shen as your main Defender carry with his updated carry Augment ""Time Knife""!
+",default,easy,s,"['shen', 'leblanc', 'rell', 'garen', 'riven', 'pyke', 'poppy', 'wukong']","['recurve bow', 'chain vest', 'tear of the goddess', 'sparring gloves', 'negatron cloak']"
+6,Quick-Gade Lucian,"This is a full Quickdraw comp with the focus on the Renegade - Lucian as your main carry!
+",slow roll,medium,s,"['lucian', 'blitzcrank', 'sylas', 'miss fortune', ""kai'sa"", 'camille', 'ezreal']","['tear of the goddess', 'chain vest', 'sparring gloves', 'needlessly large rod', 'bf sword']"
+7,Avarosa Ashe,"This is a Laser Corps reroll comp with Ashe as your main carry and Renekton and Blitzcrank as your tanks.
+",slow roll,easy,s,"['ashe', 'renekton', 'blitzcrank', 'warwick', 'lee sin', 'sivir', 'yasuo']","['bf sword', 'recurve bow', 'chain vest', 'negatron cloak', 'giants belt']"
+8,GPT LeBlanc,This is a full ADMIN comp that uses 3 star LeBlanc as your main carry with Hacker to send her straight to enemy carries.,slow roll,easy,s,"['leblanc', 'shen', 'warwick', 'sona', 'camille', 'pyke', 'blitzcrank']","['tear of the goddess', 'needlessly large rod', 'bf sword', 'sparring gloves', 'giants belt']"
+9,EZ-Realities,This is a full InfiniTeam comp that uses Ultimate Ezreal as your main damage carry and Garen as a InfiniTeam Tank in the frontline!,default,medium,s,"['ultimate ezreal', 'garen', 'miss fortune', 'shen', 'ezreal', 'sivir', 'pantheon']","['bf sword', 'sparring gloves', 'spatula', 'recurve bow', 'chain vest']"
+10,Steroid Duelists,This is a full Duelist comp that uses Vayne and Twisted Fate as your main Duelist carries while Nilah will be your core frontliner with multiple Lockets of Iron Solaris.,default,medium,a,"['vayne', 'twisted fate', 'nilah', 'annie', 'fiora', 'yasuo', 'gangplank', 'kayle']","['needlessly large rod', 'chain vest', 'tear of the goddess', 'bf sword', 'giants belt']"
+11,Deathbringers,"This comp brings the Monsters out of Set 8 - Monsters Attack! You'll play almost only Threat champions which have all increased stats by nature.
+",default,medium,a,"['aatrox', 'aurelion sol', 'fiddlesticks', 'mordekaiser', 'urgot', ""bel'veth"", 'morgana', 'rammus']","['chain vest', 'needlessly large rod', 'recurve bow', 'bf sword', 'tear of the goddess']"
+12,Hacker Draven,"This is a full Mecha PRIME comp that uses the Hacker trait and Draven as the main carry and Mecha PRIME.
+",slow roll,easy,a,"['draven', 'shen', 'leona', 'garen', 'jax', 'leblanc', 'pyke', 'wukong']","['bf sword', 'sparring gloves', 'recurve bow', 'negatron cloak', 'needlessly large rod']"
+13,Mecha Guardian,"This is a full AP comp that focuses on Spellslinger and Star Guardians with Neeko as your main carry & Mecha PRIME Garen as core frontliner.
+",default,medium,a,"['neeko', 'garen', 'leona', 'syndra', 'ekko', 'jax', 'rell', 'lux']","['bf sword', 'tear of the goddess', 'needlessly large rod', 'chain vest', 'giants belt']"
+14,Warweek,"This is a full ADMIN comp with Warwick as your main carry & his Brawler companions as backup.
+",default,medium,a,"['warwick', 'ekko', 'leblanc', 'riven', 'shen', 'camille', 'vi', 'blitzcrank']","['recurve bow', 'chain vest', 'bf sword', 'negatron cloak', 'sparring gloves']"
+15,King Slayer,This comp is focused all around the 1 cost Renegade Sylas! You'll give him tons of HP with as many Warmog's Armors because his ability scales with it and deals more damage this way!,slow roll,easy,a,"['sylas', 'jhin', 'miss fortune', 'ekko', 'viego', 'alistar', 'nasus']","['giants belt', 'chain vest', 'negatron cloak', 'tear of the goddess', 'bf sword']"
+16,Mascot Vex,"This is a slow roll comp with Vex as main carry and Riftwalkers as well as Mascots to provide her more sustain!
+",slow roll,easy,a,"['vex', 'garen', 'jhin', 'nunu', 'zac', 'alistar', 'shen', 'pyke']","['tear of the goddess', 'needlessly large rod', 'sparring gloves', 'bf sword', 'recurve bow']"
+17,Powder-Jinx,"This is a level 6 slow roll comp with the Animas Jinx & Riven as your core 3 star carries!
+",slow roll,easy,b,"['jinx', 'ekko', 'miss fortune', 'riven', 'garen', 'gnar', 'vi']","['bf sword', 'needlessly large rod', 'tear of the goddess', 'sparring gloves', 'chain vest']"
+18,Phantom Pyke,"This is a slow roll comp with Pyke as main carry and Riftwalkers, Hacker as well as Supers to provide him more Damage as your backup!
+",slow roll,easy,b,"['pyke', 'jhin', 'lee sin', 'zac', 'shen', 'vex', 'malphite', 'gangplank']","['bf sword', 'needlessly large rod', 'sparring gloves', 'recurve bow', 'chain vest']"
+19,Gadget-Gnar,This is a Gadgeteen comp that uses the new 3-cost Gnar as your main carry!,slow roll,medium,s,"['gnar', 'leblanc', 'annie', 'viego', 'shen', 'pyke', 'lulu', 'poppy']","['bf sword', 'negatron cloak', 'recurve bow', 'chain vest', 'sparring gloves']"
