@@ -3,9 +3,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+import pandas as pd
+import os
 
 MAIN_URL = "https://app.mobalytics.gg"
-DATA_PATH = "./data/"
+DATA_PATH = os.path.join(os.path.dirname(__file__), '..', 'data')
+
+# hehe this code is super messy
+# i will fix this later
 
 def add_all_traits(synergies_csv):
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -75,3 +80,12 @@ def extract_trait_info(s, synergies_csv, all_traits):
         trait_name = trait_name_html["alt"]
         num_of_trait = num_of_trait_html.string
         synergies_csv[trait_name][-1] = num_of_trait
+
+def save_tft_data(teams_csv, synergies_csv, augments_csv):
+    teams_df = pd.DataFrame(teams_csv)
+    synergies_df = pd.DataFrame(synergies_csv)
+    augments_df = pd.DataFrame(augments_csv)
+
+    teams_df.to_csv(os.path.join(DATA_PATH, 'teams.csv'), index=False)
+    synergies_df.to_csv(os.path.join(DATA_PATH, 'synergies.csv'), index=False)
+    augments_df.to_csv(os.path.join(DATA_PATH, 'augments.csv'), index=False)
