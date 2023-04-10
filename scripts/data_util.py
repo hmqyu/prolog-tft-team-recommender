@@ -32,11 +32,12 @@ def add_trait_column(driver, url, csv, param, *argv):
     return all_traits
 
 def extract_team_info(s, teams_csv, augments_csv, synergies_csv, all_traits):
+    if (s.find('div', {"class": "m-17xntb4"}) == None): return
     team_name = s.find('div', {"class": "m-17xntb4"}).h1.string
     teams_csv["Team Name"].append(team_name)
     synergies_csv["Team Name"].append(team_name)
     augments_csv["Team Name"].append(team_name)
-    teams_csv["Team Description"].append(s.find('div', {"class": "m-1vrrnd3"}).string.replace(' \n', ''))
+    teams_csv["Description"].append(s.find('div', {"class": "m-1vrrnd3"}).string.replace(' \n', ''))
     teams_csv["Roll Type"].append(s.find('div', {'class': "m-ttncf1"}).string.lower())
     teams_csv["Difficulty"].append(s.find('div', {'class': "m-17xntb4"}).find_all('div')[1].string.lower())
     teams_csv["Rank"].append(s.find('img', {'class': "m-68x97p"})["alt"].lower())
@@ -54,7 +55,7 @@ def extract_team_info(s, teams_csv, augments_csv, synergies_csv, all_traits):
         carousel_priorities.append(item_name)
     teams_csv["Carousel Priority"].append(", ".join(carousel_priorities))
 
-    augment_tiers = ["Best Silver Augments", "Best Gold Augments", "Best Prismatic Augments", "Best Hero Augments"]
+    augment_tiers = ["Silver Augments", "Gold Augments", "Prismatic Augments", "Hero Augments"]
     all_augments_html = s.find_all('div', {"class": "m-1cggxe8"})
     for i in range(4):
         augments_type = all_augments_html[i]

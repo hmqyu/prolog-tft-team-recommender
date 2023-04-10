@@ -47,7 +47,8 @@ load_team_rows([Row | Rows]) :-
     % load values to be added to the knowledge base
     Row = row(Name, Description, RollType, Difficulty, Rank, Units, CarouselPriority),
     % add to knowledge base
-    assert(data(Name, description, Description)),
+    remove_newline_char(Description, FixedDescription),
+    assert(data(Name, description, FixedDescription)),
     assert(data(Name, roll_type, RollType)),
     assert(data(Name, difficulty, Difficulty)),
     assert(data(Name, rank, Rank)),
@@ -61,7 +62,7 @@ load_team_rows([Row | Rows]) :-
 load_synergies :-
     % read file and store csv rows as Rows
     % file is interpreted with arity=29 or number of columns=29
-    csv_read_file('synergies.csv', Synergies, [arity(29)]),
+    csv_read_file('synergies.csv', Synergies),
     % fetches the list of traits (as traits can vary from set to set)
     Synergies = [HeaderRow | ValueRows],
     HeaderRow =.. [_ | Columns],
@@ -133,6 +134,9 @@ assert_list(Name, Key, Value) :-
     atomic_list_concat(List, ', ', Value),
     % add to knowledge base
     assert(data(Name, Key, List)).
+
+% removes \n characters from the end of strings
+remove_newline_char(Initial, Result) :- sub_atom(Initial, 0, _, 1, Result).
 
 % atomized_traits(Traits, AtomizedTraits) is true if AtomizedTraits is the same as
 % Traits, except each string has been "atomized" such that the strings contain
