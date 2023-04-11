@@ -47,13 +47,14 @@ load_team_rows([Row | Rows]) :-
     % load values to be added to the knowledge base
     Row = row(Name, Description, RollType, Difficulty, Rank, Units, CarouselPriority),
     % add to knowledge base
+    downcase_atom(Name, TeamName),
     remove_newline_char(Description, FixedDescription),
-    assert(data(Name, description, FixedDescription)),
-    assert(data(Name, roll_type, RollType)),
-    assert(data(Name, difficulty, Difficulty)),
-    assert(data(Name, rank, Rank)),
-    assert_list(Name, units, Units),
-    assert_list(Name, carousel_priority, CarouselPriority),
+    assert(data(TeamName, description, FixedDescription)),
+    assert(data(TeamName, roll_type, RollType)),
+    assert(data(TeamName, difficulty, Difficulty)),
+    assert(data(TeamName, rank, Rank)),
+    assert_list(TeamName, units, Units),
+    assert_list(TeamName, carousel_priority, CarouselPriority),
     % repeat for next row
     load_team_rows(Rows).
 
@@ -80,7 +81,8 @@ load_synergies_rows([], _).
 load_synergies_rows([Row | Rows], Traits) :-
     % for each trait in Traits, add its respective value to the knowledge base
     Row =.. [_ | Values],
-    Values = [TeamName | TraitValues],
+    Values = [Name | TraitValues],
+    downcase_atom(Name, TeamName),
     load_traits(TeamName, Traits, TraitValues),
     % stop backtracking
     !,
@@ -114,10 +116,11 @@ load_augments_rows([Row | Rows]) :-
     % load values to be added to the knowledge base
     Row = row(Name, BestSilverAugments, BestGoldAugments, BestPrismaticAugments, BestHeroAugments),
     % add to knowledge base
-    assert_list(Name, silver_augments, BestSilverAugments),
-    assert_list(Name, gold_augments, BestGoldAugments),
-    assert_list(Name, prismatic_augments, BestPrismaticAugments),
-    assert_list(Name, hero_augments, BestHeroAugments),
+    downcase_atom(Name, TeamName),
+    assert_list(TeamName, silver_augments, BestSilverAugments),
+    assert_list(TeamName, gold_augments, BestGoldAugments),
+    assert_list(TeamName, prismatic_augments, BestPrismaticAugments),
+    assert_list(TeamName, hero_augments, BestHeroAugments),
     % repeat for next row
     load_augments_rows(Rows).
 
