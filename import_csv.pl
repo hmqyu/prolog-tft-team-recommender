@@ -62,7 +62,7 @@ load_team_rows([Row | Rows]) :-
 load_synergies :-
     % read file and store csv rows as Rows
     % file is interpreted with arity=29 or number of columns=29
-    csv_read_file('synergies.csv', Synergies),
+    csv_read_file('synergies.csv', Synergies, [arity(29)]),
     % fetches the list of traits (as traits can vary from set to set)
     Synergies = [HeaderRow | ValueRows],
     HeaderRow =.. [_ | Columns],
@@ -135,8 +135,18 @@ assert_list(Name, Key, Value) :-
     % add to knowledge base
     assert(data(Name, Key, List)).
 
-% removes \n characters from the end of strings
-remove_newline_char(Initial, Result) :- sub_atom(Initial, 0, _, 1, Result).
+% remove_newline_char(Initial, Result) is true if it finds '\n' at the end of Initial and removes it to form Result
+% OR, there is no '\n' at the end of Initial, so Initial = Result
+% case: there is no \n, so no deletion should occur
+remove_newline_char(Initial, Initial) :-
+    sub_atom(Initial, _, 1, 0, C),
+    C \= '\n',
+    % stop backtracking, ie. false from appearing when this or next case fails
+    !.
+% case: there is \n, so deletion should occur
+remove_newline_char(Initial, Result) :- 
+    sub_atom(Initial, _, 1, 0, '\n'), 
+    sub_atom(Initial, 0, _, 1, Result).
 
 % atomized_traits(Traits, AtomizedTraits) is true if AtomizedTraits is the same as
 % Traits, except each string has been "atomized" such that the strings contain
