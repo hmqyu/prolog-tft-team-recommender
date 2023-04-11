@@ -3,6 +3,7 @@
 % the first column represents a primary key/unique id for the row's values.
 % data from the csv file will be converted into a knowledge base that the overall program can use
 % to look up information about different team comps for Teamfight Tactics.
+
 :- use_module(library(persistency)).
 
 % represents how the csv data is stored
