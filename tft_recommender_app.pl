@@ -1,14 +1,10 @@
 % the actual app
 
-set_prolog_flag(singleton, off)
+:- [import_csv].
+
+set_prolog_flag(singleton, off).
 
 % sample data
-data(kaisaTeam, roll_type, slowRoll).
-data(kaisaTeam, difficulty, easy).
-data(kaisaTeam, rank, s).
-data(kaisaTeam, units, [kaisa, ekko, garen]).
-data(kaisaTeam, carousel_priority, ['chain vest', 'bf sword', 'recurve bow']).
-
 
 % prolog representation of English grammar, adapted from https://www.cs.ubc.ca/~poole/cs312/2023/prolog/geography_query_string.pl
 
@@ -74,15 +70,14 @@ has(X, Y) :-
 
 team(X) :- data(X, A, B).
 champion(X) :- 
-    data(X, units, Z),
-    member(Y, Z).
+    data(Y, units, Z),
+    member(X, Z).
 item(X) :- 
-    data(X, carousel_priority, Z),
-    member(Y, Z).
+    data(Y, carousel_priority, Z),
+    member(X, Z).
 
 % adj(L0, L1, Ind) is true if L0-L1 
 % is an adjective that is true of Ind
-$ rank _, difficulty, roll_type can be applied to teams
 
 adj(['s','rank'|L],L,Ind,[data(Ind, rank, s)|C],C).
 adj(['a','rank'|L],L,Ind,[data(Ind, rank, a)|C],C).
@@ -139,12 +134,12 @@ reln([prioritized | L], L, Sub, Obj, [has(Sub, Obj)|C], C).
 
 % question(Question, QR, Ind) is true if Ind is  an answer to Question
 
-question([what, is | L0], L1, Ind, C0, C1) :-
+question(['What', is | L0], L1, Ind, C0, C1) :-
     aphrase(L0, L1, Ind, C0, C1).
-question([what | L0], L2, Ind, C0, C2) :-
+question(['What' | L0], L2, Ind, C0, C2) :-
     noun_phrase(L0, L1, Ind, C0, C1), 
     mp(L1, L2, Ind, C1, C2).
-question([which | L0], L2, Ind, C0, C2) :-
+question(['Which' | L0], L2, Ind, C0, C2) :-
     noun_phrase(L0, L2, Ind, C0, C2), 
     mp(L1, L2, Ind, C1, C2).
 
