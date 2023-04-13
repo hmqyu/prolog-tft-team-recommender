@@ -1,9 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%        IMPORTS         %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 :- include('import_csv.pl').
-:- include('recommender_system.pl').
+:- include('recommender_util.pl').
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%        STARTER         %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% load database
+setup :- init.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    RECOMMENDER QUIZ    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% shorthand for recommend ap
+r :- recommend.
 
 % the app that recommends a tft comp given the users' inputs
 recommend :-
-    init,
     writeln('-------------------------------------------------------------------------------'),
     writeln('----------------         Teamfight Tactics Recommender         ----------------'),
     writeln('-------------------------------------------------------------------------------'),
@@ -87,29 +106,80 @@ recommend :-
     writeln('Please select the format you\'d like them to be displayed in:'),
     writeln('> Brief (Units, Carousel Priority) \n> Summary (Name, Rank, Units, Traits, Carousel Priority) \n> Detailed'),
     nl,
-    readln(Format, _, _, [39, 45, 95], lowercase),
+    readln([Format], _, _, [39, 45, 95], lowercase),
     nl,
     writeln('-------------------------------------------------------------------------------'),
     nl,
     writeln('Here are you team comp recommendations!'),
     nl,
-    % writeln(Difficulty),writeln(RollType),writeln(Units),writeln(Items),
-    % write(SilverAugments),write(GoldAugments),write(PrismaticAugments),write(HeroAugments),
+    writeln('-------------------------------------------------------------------------------'),
     findTeam(Teams, Difficulty, RollType, Items, Units, SilverAugments, GoldAugments, PrismaticAugments, HeroAugments),
     writeTeams(Teams, Format).
 
 % displays teams using given format
-writeTeams(Teams, [brief]) :- brief_display(Teams).
-
-brief_display([]).
-brief_display([Team | Teams]) :- 
-    writeln('-------------------------------------------------------------------------------'),
+writeTeams([], _).
+writeTeams([Team | Teams], brief) :- 
+    nl, brief_display(Team),
     nl,
+    writeln('-------------------------------------------------------------------------------'),
+    writeTeams(Teams, brief).
+writeTeams([Team | Teams], summary) :- 
+    nl, summary_display(Team),
+    nl,
+    writeln('-------------------------------------------------------------------------------'),
+    writeTeams(Teams, summary).
+writeTeams([Team | Teams], detailed) :- 
+    nl, detailed_display(Team),
+    nl,
+    writeln('-------------------------------------------------------------------------------'),
+    writeTeams(Teams, detailed).
+
+% print brief description of team comps
+brief_display(Team) :- 
     write('Units: '), data(Team, units, Units), write(Units),
     nl,
     write('Carousel Priority: '), data(Team, carousel_priority, Items), write(Items),
+    nl.
+
+% print a summary of team comps
+summary_display(Team) :- 
+    write('Name: '), write(Team),
     nl,
-    brief_display(Teams).
+    write('Rank: '), data(Team, rank, Rank), write(Rank),
+    nl,
+    write('Traits: '), print_traits(Team),
+    nl,
+    brief_display(Team).
+
+% print all details about team comps
+detailed_display([]).
+detailed_display(Team) :- 
+    summary_display(Team),
+    write('Description: '), data(Team, description, Description), write(Description),
+    nl,
+    write('Roll Type: '), data(Team, roll_type, RollType), write(RollType),
+    nl,
+    write('Difficulty: '), data(Team, difficulty, Difficulty), write(Difficulty),
+    nl.
+
+% print all active traits of a team comp
+print_traits(Team) :-
+    find_traits_with_value(Team, 10).
+
+% find traits with an active value of Acc
+find_traits_with_value(_, 0).
+find_traits_with_value(Team, Acc) :-
+    Acc > 0,
+    findall(Trait, (data(Team, Trait, Acc)), Traits),
+    format_trait_string(Traits, Acc),
+    NextAcc is Acc - 1,
+    find_traits_with_value(Team, NextAcc).
+
+% print all traits with an active value of Value
+format_trait_string([], _).
+format_trait_string([Trait | Traits], Value) :-
+    write(Value), write('-'), write(Trait), write(' '),
+    format_trait_string(Traits, Value).
 
 % format one-word inputs appropriately
 format_word_inputs(['none'], []).
@@ -146,3 +216,52 @@ de_abbreviate('gloves', 'sparring gloves').
 de_abbreviate('glove', 'sparring glove').
 de_abbreviate('spat', 'spatula').
 de_abbreviate('tear', 'tear of the goddess').
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    NLP (UNFINISHED)    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+q(Answer) :-
+    write("Ask me anything about TFT comps: "), 
+    flush_output(current_output),
+    readln(Question, _, _, [39, 45, 95], lowercase),
+    ask(Question, Answer).
+
+% debugging
+t(Answer) :-
+    init,
+    ask([what, are, the, best, teams, '?'], Answer).
+
+ask(Question, Answer) :-
+    question(Question, End, Answer, Queries, []),
+    member(End, [[], ['?'], ['.']]),
+    query_data(Queries).
+
+query_data([]).
+query_data([Query | Queries]) :-
+    call(Query),
+    query_data(Queries).
+
+question([what, are | L0], L1, Answer, C0, C1) :- noun_phrase(L0, L1, Answer, C0, C1).
+
+noun_phrase(L0, L2, Answer, C0, C2) :-
+    det(L0, L1, Answer, C0, C1),
+    relation(L1, L2, Answer, C1, C2).
+
+noun_phrase(L0, L2, Answer, C0, C2) :-
+    det(L0, L1, Answer, C0, C1),
+    feature(L1, L2, Answer, C1, C2).
+
+det([the | L], L, _, C, C).
+det(L,L,_,C,C).
+
+relation(L0, L2, Answer, C0, C2) :-
+    feature(L0, L1, Team, Answer, C0, C1),
+    noun(L1, L2, Team, C1, C2).
+relation(L, L, _, C, C).
+
+feature([best, silver, augments, for | L], L, Team, Answer, [data(Team, silver_augments, Answer) | C], C).
+feature([best, teams | L], L, Team, [data(Team, rank, s) | C], C).
+
+noun([Answer | L], L, Answer, [data(Answer, description, _) | C], C).
